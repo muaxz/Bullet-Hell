@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgui77wu33dd3"]
+
+[ext_resource type="Script" uid="uid://2voso6rxhjdn" path="res://Enemy.cs" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
+size = Vector2(67, 67.25)
+
+[sub_resource type="Gradient" id="Gradient_dqdia"]
+offsets = PackedFloat32Array(0, 0.005952381)
+colors = PackedColorArray(0, 0, 0, 1, 0.2, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ax6xs"]
+gradient = SubResource("Gradient_dqdia")
+width = 60
+height = 60
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+metadata/_snap_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
+size = Vector2(70, 60)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_7xaro")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_ax6xs")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7k104")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
