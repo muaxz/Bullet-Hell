@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgui77wu33dd3"]
+[gd_scene load_steps=7 format=3 uid="uid://cgui77wu33dd3"]
 
 [ext_resource type="Script" uid="uid://2voso6rxhjdn" path="res://Enemy.cs" id="1_7k104"]
+[ext_resource type="PackedScene" uid="uid://7s5q3sfii5rx" path="res://enemy_bullet.tscn" id="2_4gyqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xaro"]
-size = Vector2(67, 67.25)
+size = Vector2(65.5, 66.625)
 
 [sub_resource type="Gradient" id="Gradient_dqdia"]
 offsets = PackedFloat32Array(0, 0.005952381)
@@ -18,21 +19,33 @@ fill_to = Vector2(0, 0)
 metadata/_snap_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
-size = Vector2(70, 60)
+size = Vector2(71.125, 72.625)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("healthBar")]
 script = ExtResource("1_7k104")
+healthBar = NodePath("ProgressBar")
+enemyBullet = ExtResource("2_4gyqm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(-0.75, -0.3125)
 shape = SubResource("RectangleShape2D_7xaro")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_ax6xs")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, 4)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.5625, -4.3125)
 shape = SubResource("RectangleShape2D_7k104")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -46.0
+offset_top = -66.0
+offset_right = 54.0
+offset_bottom = -46.0
+theme_override_colors/font_outline_color = Color(0.7529412, 0, 0, 1)
+value = 100.0
+show_percentage = false

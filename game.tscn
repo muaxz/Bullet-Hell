@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cckm7pokuqdme"]
+[gd_scene load_steps=5 format=3 uid="uid://cckm7pokuqdme"]
 
 [ext_resource type="PackedScene" uid="uid://dvg4bc7aiqmot" path="res://character_body_2d.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dw5ujwwqoyx1x" path="res://GameManager.cs" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dbqkyh7drd0qj" path="res://spawner.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://ca3mj5fmbhavj" path="res://Camera2d.cs" id="4_fc0e3"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("scoreLabel")]
 script = ExtResource("1_feb5d")
@@ -14,7 +15,9 @@ position = Vector2(-7, -11)
 [node name="Spawner" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(-501, 300)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("4_fc0e3")
+Player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,9 +25,23 @@ position = Vector2(-501, 300)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -123.0
+offset_left = -154.0
 offset_top = 10.0
+offset_right = -31.0
 offset_bottom = 60.0
 grow_horizontal = 0
+theme_override_font_sizes/font_size = 30
 text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = 11.0
+offset_right = 165.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(0.7577104, 0.28358802, 0.23942405, 1)
+theme_override_colors/font_outline_color = Color(0, 0.44483453, 0, 1)
+value = 100.0
+show_percentage = false

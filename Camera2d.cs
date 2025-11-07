@@ -1,18 +1,19 @@
 using Godot;
 using System;
 
-public partial class Bullet : Area2D
+public partial class Camera2d : Camera2D
 {
 	// Called when the node enters the scene tree for the first time.
-	
+	[Export]
+	public Node2D Player;
 	public override void _Ready()
     {
         
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
     {
-		Position += Transform.X * 0.5f;//10 is speed
+		Position = Player.GlobalPosition;
     }
 }

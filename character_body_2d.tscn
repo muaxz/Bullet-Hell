@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvg4bc7aiqmot"]
+[gd_scene load_steps=7 format=3 uid="uid://dvg4bc7aiqmot"]
 
 [ext_resource type="Texture2D" uid="uid://cekevmox6646r" path="res://icon.svg" id="1_f50pn"]
-[ext_resource type="Script" uid="uid://cw8njhgrg18jk" path="res://CharacterBody2d.cs" id="1_ij6vw"]
+[ext_resource type="Script" uid="uid://cluhufww4nrk0" path="res://CharacterBody2d.cs" id="1_ij6vw"]
 [ext_resource type="PackedScene" uid="uid://ds12aurvoelp5" path="res://bullet.tscn" id="2_ghijl"]
-[ext_resource type="Texture2D" uid="uid://bxfseb3iwv88w" path="res://png-clipart-pixel-art-digital-art-pixel-gun-angle-vehicle-thumbnail.png" id="4_44cfe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_186t8"]
 
@@ -15,9 +14,10 @@ width = 140
 fill_from = Vector2(0, 0.99572647)
 fill_to = Vector2(0, 0.991453)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gunPoint")]
 script = ExtResource("1_ij6vw")
 BulletScene = ExtResource("2_ghijl")
+gunPoint = NodePath("gun/Node2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_186t8")
@@ -25,16 +25,13 @@ shape = SubResource("CircleShape2D_186t8")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_f50pn")
 
-[node name="gun3" type="Sprite2D" parent="."]
-visible = false
+[node name="gun" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(1.0000019, 0.9999995)
-rotation = -0.9632662
+position = Vector2(-1.0000038, 3.8146973e-06)
+rotation = -2.2731156
 scale = Vector2(1, 0.390625)
 texture = SubResource("GradientTexture2D_ghijl")
 offset = Vector2(60, 0)
 
-[node name="gun" type="Sprite2D" parent="."]
-position = Vector2(34, -1)
-scale = Vector2(0.3821839, 0.33908045)
-texture = ExtResource("4_44cfe")
+[node name="Node2D" type="Node2D" parent="gun"]
+position = Vector2(122.88601, -0.46270072)

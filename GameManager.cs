@@ -6,6 +6,8 @@ public partial class GameManager : Node2D
 	// Called when the node enters the scene tree for the first time.
 	[Export]
 	public Label scoreLabel;
+	[Export]
+	public ProgressBar playerBar;
 	int score = 0;
 	public override void _Ready()
     {
@@ -19,8 +21,7 @@ public partial class GameManager : Node2D
 
 	public void addScore()
 	{
-		GD.Print("OINNNNN");
 		score += 10;
-		scoreLabel.Text = "Score:" + score.ToString();
+		scoreLabel.Text = "Score: " + score.ToString();
     }
 }

@@ -8,6 +8,10 @@ public partial class CharacterBody2d : CharacterBody2D
 	const float Acceleration = 3000;
 	[Export]
 	public PackedScene BulletScene;
+	[Export]
+	public Node2D gunPoint;
+	const float interval = 0.1f;
+	float timeSinceLastBullet = 0f;
 	Node2D gunSprite;
 	public override void _Ready()
 	{
@@ -25,7 +29,7 @@ public partial class CharacterBody2d : CharacterBody2D
 		// Call the built-in MoveAndSlide() method.
 		handleMovement((float)delta);
 		MoveAndSlide();
-		shoot();
+		shoot(delta);
 		
 	}
 
@@ -58,16 +62,28 @@ public partial class CharacterBody2d : CharacterBody2D
 		Vector2 mousePosition = GetGlobalMousePosition();
 		Vector2 direction = mousePosition - GlobalPosition;
 		gunSprite.Rotation = direction.Angle();
+		
 	}
-	
-	public void shoot()
+
+	public void shoot(double delta)
 	{
-		if (Input.IsActionJustPressed("shoot"))
+
+		if (Input.IsActionPressed("shoot"))
 		{
-			var bullet = (Bullet)BulletScene.Instantiate();
-			bullet.Position = GlobalPosition;
-			bullet.Rotation = gunSprite.Rotation;
-			GetTree().CurrentScene.AddChild(bullet);
+			timeSinceLastBullet += (float)delta;
+			if (timeSinceLastBullet >= interval)
+			{
+				var bullet = (Bullet)BulletScene.Instantiate();
+				bullet.Position = gunPoint.GlobalPosition;// Position is relative to the Parent
+				bullet.Rotation = gunSprite.Rotation;
+				GetTree().CurrentScene.AddChild(bullet);
+				timeSinceLastBullet = 0;
+			}
 		}
 	}
+	
+	public void _on_area_2d_enemy_bullet_entered()
+    {
+        
+    }
 }
