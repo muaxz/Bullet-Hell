@@ -1,0 +1,4 @@
+[gd_resource type="PhysicalSkyMaterial" format=3 uid="uid://dhxtcreb24wde"]
+
+[resource]
+ground_color = Color(0.8627472, 0.090752356, 0.10114219, 1)

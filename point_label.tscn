@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy8h6wecrhcfa"]
+
+[ext_resource type="Script" uid="uid://d385bfajsp03f" path="res://PointLabel.cs" id="1_lgy4i"]
+
+[node name="PointLabel" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 20
+text = "+1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_lgy4i")

@@ -10,18 +10,24 @@ public partial class Enemy : CharacterBody2D
 	public ProgressBar healthBar;
 	[Export]
 	public PackedScene enemyBullet;
+	[Export]
+	public Sprite2D enemySprite;
+	[Export]
+	public PackedScene pointLabel;
 	Area2D enemyArea;
 	float speed = 300f;
 	double health = 100;
 	bool isDead = false;
 	float timeSinceLastBullet = 0.4f;
 	float interval = 0.4f;
+	Color originalColor;
 	public override void _Ready()
     {
 		Player = GetNode<Node2D>("../Player");
 		GameManager = GetNode<GameManager>("../../Game");
 		enemyArea = GetNode<Area2D>("./Area2D");
 		enemyArea.AreaEntered += _on_area_2d_area_entered;
+		originalColor = enemySprite.Modulate;
 		if(Player == null)
         {
 			GD.Print("null");
@@ -63,7 +69,7 @@ public partial class Enemy : CharacterBody2D
 			timeSinceLastBullet = 0;
         }
     }
-
+	// enemy is hit here
 	public void _on_area_2d_area_entered(Area2D area)
 	{
 		//check if bullet enters not player
@@ -72,11 +78,17 @@ public partial class Enemy : CharacterBody2D
 		{
 			health -= 30;
 			healthBar.Value = health;
+			enemySprite.Modulate = Colors.Red;
+			var tween = CreateTween();
+			tween.TweenProperty(enemySprite, "modulate", originalColor, 0.2f);
 			if (health <= 0)
-			{
+			{	
 				isDead = true;
 				QueueFree();
 				GameManager.addScore();
+				var label = (PointLabel)pointLabel.Instantiate();
+				label.show(GlobalPosition, "+10");
+				GetTree().CurrentScene.AddChild(label);
 			}
 			area.QueueFree();
 		}
