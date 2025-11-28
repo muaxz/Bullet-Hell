@@ -4,7 +4,7 @@ using System;
 public partial class Spawner : Node2D
 {
 	[Export]
-	public PackedScene enemy;
+	public PackedScene[] enemy;
 	
 	[Export]
 	public float spawnInterval = 1.0f; // Time between spawns
@@ -27,10 +27,14 @@ public partial class Spawner : Node2D
 
 	private void SpawnEnemy()
 	{
-		if (enemy != null)
+		if (enemy != null && enemy.Length > 0)
 		{
+			// Randomly select enemy type
+			int randomEnemyIndex = random.Next(enemy.Length);
+			
 			// Create enemy instance
-			Node2D enemyInstance = (Enemy)enemy.Instantiate<Node2D>();
+			Node2D enemyInstance = (Enemy)enemy[randomEnemyIndex].Instantiate<Node2D>();
+			
 
 			// Set random position
 			Vector2 randomPosition = new Vector2(

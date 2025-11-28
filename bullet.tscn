@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ds12aurvoelp5"]
 
 [ext_resource type="Script" uid="uid://bn0mvr013kikg" path="res://Bullet.cs" id="1_v7oki"]
-[ext_resource type="Texture2D" uid="uid://i64gsu0fww7r" path="res://bullet3.png" id="2_v8qja"]
+[ext_resource type="Texture2D" uid="uid://b3la4684qb27e" path="res://bullet.png" id="2_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rtl8c"]
 size = Vector2(34, 19)
@@ -18,5 +18,5 @@ shape = SubResource("RectangleShape2D_rtl8c")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -0.9999995)
 rotation = 1.5793291
-scale = Vector2(1.1763364, 1.1595622)
+scale = Vector2(0.015, 0.015)
 texture = ExtResource("2_v8qja")

@@ -1,32 +1,52 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvg4bc7aiqmot"]
+[gd_scene load_steps=9 format=3 uid="uid://dvg4bc7aiqmot"]
 
 [ext_resource type="Script" uid="uid://cluhufww4nrk0" path="res://CharacterBody2d.cs" id="1_ij6vw"]
 [ext_resource type="PackedScene" uid="uid://ds12aurvoelp5" path="res://bullet.tscn" id="2_ghijl"]
-[ext_resource type="Texture2D" uid="uid://ctf73m8kbjtp0" path="res://idle_0.png" id="3_ghijl"]
+[ext_resource type="PackedScene" uid="uid://d3qca002ld80x" path="res://shotgun_particle.tscn" id="3_lhvu3"]
 [ext_resource type="Texture2D" uid="uid://bct7x7ni22l6h" path="res://weaponR1.png" id="4_44cfe"]
+[ext_resource type="Texture2D" uid="uid://3r5nlks7oiwx" path="res://char_idle_0.png" id="4_lhvu3"]
+[ext_resource type="Texture2D" uid="uid://x6qcfpb8eg3o" path="res://muzzle.png" id="5_dd465"]
+[ext_resource type="AudioStream" uid="uid://bvqsah1k4rlmt" path="res://556 Single Isolated MP3.mp3" id="7_4sjlk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_186t8"]
 radius = 67.02985
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gunPoint")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gunPoint", "muzzle", "gunShot")]
+scale = Vector2(0.8, 0.8)
+up_direction = Vector2(0, 1)
 script = ExtResource("1_ij6vw")
 BulletScene = ExtResource("2_ghijl")
 gunPoint = NodePath("gun/Node2D")
+muzzle = NodePath("gun/Muzzle")
+gunShot = NodePath("gun/AudioStreamPlayer2D")
+shotgunParticle = ExtResource("3_lhvu3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -71)
 shape = SubResource("CircleShape2D_186t8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -158)
+position = Vector2(0, -85.99999)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_ghijl")
+texture = ExtResource("4_lhvu3")
+offset = Vector2(0, 10)
 
 [node name="gun" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(11.000006, -82)
-scale = Vector2(0.1, 0.1)
+position = Vector2(0, 41.25)
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("4_44cfe")
+offset = Vector2(0, -400)
 
 [node name="Node2D" type="Node2D" parent="gun"]
-position = Vector2(639.99994, 399.99997)
+position = Vector2(660, -9.999967)
+
+[node name="Muzzle" type="Sprite2D" parent="gun"]
+visible = false
+position = Vector2(939.9999, -9.999962)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("5_dd465")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="gun"]
+stream = ExtResource("7_4sjlk")
+volume_db = -10.094
+playback_type = 1

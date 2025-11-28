@@ -13,6 +13,6 @@ public partial class Bullet : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
     {
-		Position += Transform.X * 0.5f;//10 is speed
+		Position += Transform.X * 1500f * (float)delta;//10 is speed
     }
 }

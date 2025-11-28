@@ -1,19 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://cckm7pokuqdme"]
+[gd_scene load_steps=11 format=3 uid="uid://cckm7pokuqdme"]
 
 [ext_resource type="PackedScene" uid="uid://dvg4bc7aiqmot" path="res://character_body_2d.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dw5ujwwqoyx1x" path="res://GameManager.cs" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dbqkyh7drd0qj" path="res://spawner.tscn" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://ca3mj5fmbhavj" path="res://Camera2d.cs" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bknu2p3asjbb" path="res://enemy_2.tscn" id="4_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://cgui77wu33dd3" path="res://enemy.tscn" id="4_vef74"]
+[ext_resource type="Texture2D" uid="uid://bct7x7ni22l6h" path="res://weaponR1.png" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://jdtrdl765210" path="res://weaponR2.png" id="6_eow3j"]
+[ext_resource type="Texture2D" uid="uid://da6ecafj7451c" path="res://weaponR3.png" id="7_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://dmikn7jhgmp81" path="res://ground2_white.png" id="10_hve3p"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("scoreLabel")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("scoreLabel", "gun1", "gun2", "gun3")]
 script = ExtResource("1_feb5d")
 scoreLabel = NodePath("CanvasLayer/Label")
+gun1 = NodePath("CanvasLayer/GunUI/TextureRect")
+gun2 = NodePath("CanvasLayer/GunUI/TextureRect2")
+gun3 = NodePath("CanvasLayer/GunUI/TextureRect3")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 position = Vector2(-7, -11)
 
 [node name="Spawner" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(-501, 300)
+enemy = Array[PackedScene]([ExtResource("4_vef74"), ExtResource("4_j5wjh")])
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("4_fc0e3")
@@ -45,3 +55,144 @@ theme_override_colors/font_color = Color(0.7577104, 0.28358802, 0.23942405, 1)
 theme_override_colors/font_outline_color = Color(0, 0.44483453, 0, 1)
 value = 100.0
 show_percentage = false
+
+[node name="GunUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -153.0
+offset_right = 46.0
+offset_bottom = -113.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/GunUI"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 0
+offset_left = -8.0
+offset_top = -132.0
+offset_right = 165.0
+offset_bottom = 41.0
+texture = ExtResource("5_7jktm")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GunUI/TextureRect"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 117.0
+offset_right = 49.0
+offset_bottom = 140.0
+text = "1"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/GunUI"]
+layout_mode = 0
+offset_left = -84.0
+offset_top = -73.0
+offset_right = 199.0
+offset_bottom = 100.0
+texture = ExtResource("6_eow3j")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GunUI/TextureRect2"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 119.0
+offset_right = 127.0
+offset_bottom = 142.0
+text = "2"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/GunUI"]
+layout_mode = 0
+offset_left = -55.0
+offset_top = -21.0
+offset_right = 228.0
+offset_bottom = 152.0
+texture = ExtResource("7_j5wjh")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/GunUI/TextureRect3"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 122.0
+offset_right = 98.0
+offset_bottom = 145.0
+text = "3"
+horizontal_alignment = 1
+
+[node name="Ground2White" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(20.999985, -0.00012207031)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1383.9999, -7.275958e-12)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(21, 891.99994)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1376.9999, 892)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2746, 892)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White7" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2746, 1781)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White8" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1394.0001, 1781)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White9" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(23, 1781)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White10" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1343.9999, 1777)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White11" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1344, 885.00006)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White12" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-1344, 4)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
+
+[node name="Ground2White6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2746, -3.999999)
+scale = Vector2(0.671875, 0.44189456)
+texture = ExtResource("10_hve3p")
